@@ -1,10 +1,6 @@
 package com.example.socketnoti.controller;
 
-import com.example.socketnoti.dto.BoardDTO;
-import com.example.socketnoti.mapper.BoardMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

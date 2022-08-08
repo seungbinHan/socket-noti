@@ -5,12 +5,71 @@
     <title>Title</title>
 </head>
 <body>
-index page 입니당.
-<a href="/selectBoard"> 디테일 가기</a>
+<!--index page 입니당.-->
+<!--<a href="/selectBoard"> 디테일 가기</a>-->
+
+<input type="button" id="setSessionBtn" value="admin세션 부여 버튼">
+<input type="button" id="getSessionBtn" value="부여된 세션 확인">
+
+<button id="receiveBtn"> 메시지 보내기!</button>
+
+
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
+    $(function(){
+        let webSocket = null;
+        connect();
 
+        $("#setSessionBtn").on("click",() => {
+            $.ajax({
+                url:"/giveSession",
+                method:"get",
+                success:(res)=>{
+                    console.log(res);
+                },
+                error:(err)=>{
+                    console.log(err);
+                }
+
+            })
+        })
+
+        $("#getSessionBtn").on("click",() => {
+            $.ajax({
+                url:"/getSession",
+                method:"get",
+                success:(res)=>{
+                    alert(res);
+                },
+                error:(err)=>{
+                    console.log(err);
+                }
+
+            })
+        })
+    })
+
+    $(document).on("click","#receiveBtn",function(){
+        webSocket.send("클라이언트에서 보낸 메세지");
+    })
+
+    const connect = () => {
+        const ws = new WebSocket("ws://localhost:8080/ws");
+        webSocket = ws;
+
+        ws.onmessage = function(msg){
+            console.log("onMessage!");
+            alert(msg.data);
+        }
+        ws.onopen = function(msg){
+            console.log("open!");
+        }
+        ws.onclose = function(msg){
+            console.log("close!");
+        }
+
+    }
 </script>
 </html>
