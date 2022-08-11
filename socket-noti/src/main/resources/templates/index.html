@@ -13,6 +13,8 @@
 
 <button id="receiveBtn"> 메시지 보내기!</button>
 
+<button id="accessTest"> 과연? 접근이 될것인가</button>
+
 
 
 </body>
@@ -21,6 +23,20 @@
     $(function(){
         let webSocket = null;
         connect();
+        $("#accessTest").on("click",() => {
+            $.ajax({
+                url:"/access",
+                method:"get",
+                success:(res)=>{
+                    console.log(res);
+                },
+                error:(err)=>{
+                    console.log(err);
+                }
+            })
+
+        })
+
 
         $("#setSessionBtn").on("click",() => {
             $.ajax({
@@ -59,13 +75,14 @@
         const ws = new WebSocket("ws://localhost:8080/ws");
         webSocket = ws;
 
+        ws.onopen = function(msg){
+            console.log("open!");
+        }
         ws.onmessage = function(msg){
             console.log("onMessage!");
             alert(msg.data);
         }
-        ws.onopen = function(msg){
-            console.log("open!");
-        }
+
         ws.onclose = function(msg){
             console.log("close!");
         }

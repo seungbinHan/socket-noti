@@ -6,19 +6,17 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 
-    ArrayList<WebSocketSession> userSessions = new ArrayList<WebSocketSession>();
-    Map<String,WebSocketSession> userSession = new HashMap<>();
+    private final ArrayList<WebSocketSession> userSessions = new ArrayList<WebSocketSession>();
 
     /* Client가 접속 시 호출되는 메서드 */
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
+        System.out.println("연결 1");
         userSessions.add(session);
     }
 
