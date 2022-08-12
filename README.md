@@ -1,12 +1,12 @@
 # socket-noti
 
 1. 웹소켓을 위한 디펜던시 추가
-
+```
 <dependency>
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-websocket</artifactId>
 </dependency>
-
+```
 2. TextWebSocketHandler 을 상속해서  3개 메서드 오버라이드 한 클래스 생성
  1) afterConnectionEstablished  //연결 완료후 실행되는 메서드
  2) handleTextMessage  // 메시지 오면 실행되는 메서드
